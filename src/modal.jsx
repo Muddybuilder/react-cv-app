@@ -1,25 +1,59 @@
-import { useState } from 'react'
-import { Dialog } from '@headlessui/react'
-
-
-export default function MyDialog({isOpen, setIsOpen}) {
+export default function Dialog(
+  { isOpen, setIsOpen },
+  { schoolName, setSchoolName },
+  { date, setDate },
+  { description, setDescription }
+) {
+  let tmpSchool = schoolName;
+  let tmpDate = date;
+  let tmpDesc = description;
 
   return (
-    <Dialog open={isOpen}>
-      <Dialog.Panel>
-        <Dialog.Title>Edit Informaion</Dialog.Title>
-        <Dialog.Description>
-          This will permanently deactivate your account
-        </Dialog.Description>
+    <dialog open={isOpen}>
+      <div className="modal">
+        <label htmlFor="mySchool">School Name</label>
+        <input
+          name="mySchool"
+          id="mySchool"
+          type="text"
+          defaultValue={schoolName}
+          onChange={(e) => {
+            tmpSchool = e.target.value;
+          }}
+        ></input>
+        <label htmlFor="myDate">Date</label>
+        <input
+          name="myDate"
+          id="myDate"
+          type="text"
+          defaultValue={date}
+          onChange={(e) => {
+            tmpDate = e.target.value;
+          }}
+        ></input>
+        <label htmlFor="myDesc">Description</label>
+        <input
+          name="myDesc"
+          id="myDesc"
+          type="text"
+          defaultValue={description}
+          onChange={(e) => {
+            tmpDesc = e.target.value;
+          }}
+        ></input>
+      </div>
 
-        <p>
-          Are you sure you want to deactivate your account? All of your data
-          will be permanently removed. This action cannot be undone.
-        </p>
-
-        <button onClick={() => setIsOpen(false)}>Deactivate</button>
-        <button onClick={() => setIsOpen(false)}>Cancel</button>
-      </Dialog.Panel>
-    </Dialog>
-  )
+      <button
+        onClick={() => {
+          setSchoolName(tmpSchool);
+          setDate(tmpDate);
+          setDescription(tmpDesc);
+          setIsOpen(false);
+        }}
+      >
+        Edit
+      </button>
+      <button onClick={() => setIsOpen(false)}>Cancel</button>
+    </dialog>
+  );
 }

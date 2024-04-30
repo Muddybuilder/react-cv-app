@@ -1,30 +1,58 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import MyDialog from './modal'
-function App() {
-  const [count, setCount] = useState(0)
-  let [isOpen, setIsOpen] = useState(true)
+import { useState } from "react";
+import "./App.css";
+import "./Modal.css";
+import "./InfoModal.css"
 
+import InfoDialog from "./InfoModal";
+import Dialog from "./Modal";
+
+function App() {
+  const [isInfoOpen, setIsInfoOpen] = useState(false);
+  const [isEducationOpen, setisEducationOpen] = useState(false);
+  const [userName, setUserName] = useState("John Doe");
+  const [email, setEmail] = useState("jdpower@gmail.com");
+  const [number, setNumber] = useState("112-358-1321");
 
   return (
     <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+      <div>
+        <button
+          onClick={() => {
+            setIsInfoOpen(!isInfoOpen);
+          }}
+        >
+          {isInfoOpen ? "Close" : "Edit Info"}
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+        <>
+          {isInfoOpen &&
+            InfoDialog(
+              { isOpen: isInfoOpen, setIsOpen: setIsInfoOpen },
+              { userName, setUserName },
+              { email, setEmail },
+              { number, setNumber }
+            )}
+        </>
       </div>
-      <button onClick={()=>{setIsOpen(isOpen?false:true)}}>{isOpen?"Close":"Open"}</button>
-      {isOpen && MyDialog({isOpen, setIsOpen})}
-
-
+      <div>
+        <button
+          onClick={() => {
+            setisEducationOpen(!isEducationOpen);
+          }}
+        >
+          {isEducationOpen ? "Close" : "Add Education"}
+        </button>
+        <>
+          {isEducationOpen &&
+            Dialog(
+              { isOpen: isEducationOpen, setIsOpen: setisEducationOpen },
+              { userName, setUserName },
+              { email, setEmail },
+              { number, setNumber }
+            )}
+        </>
+      </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
