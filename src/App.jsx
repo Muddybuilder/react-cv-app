@@ -19,13 +19,23 @@ function App() {
   const [schoolName, setSchoolName] = useState("University A");
   const [eduDate, setEduDate] = useState("01/01/1970 - 01/01/2024");
   const [eduDesc, setEduDesc] = useState(
-    "Best University in the world, so I never left"
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\
+    Duis semper ex et ornare lobortis.\
+    Cras aliquet orci nec diam tempus, a feugiat sem convallis.\
+    Pellentesque congue sem nec congue ultricies.\
+    Nam vehicula nisl ut dictum fringilla."
   );
 
   const [companyName, setCompanyName] = useState("Good Company");
   const [jobTitle, setJobTitle] = useState("Lunch stealer");
   const [companyDate, setCompanyDate] = useState("01/01/2024 - 01/14/2024");
-  const [companyDesc, setcompanyDesc] = useState("Provides free lunch");
+  const [companyDesc, setcompanyDesc] = useState(
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\
+  Duis semper ex et ornare lobortis.\
+  Cras aliquet orci nec diam tempus, a feugiat sem convallis.\
+  Pellentesque congue sem nec congue ultricies.\
+  Nam vehicula nisl ut dictum fringilla."
+  );
   const info = { userName, setUserName, email, setEmail, number, setNumber };
   const edu = {
     schoolName,
@@ -94,7 +104,7 @@ function App() {
       <div className="main">
         <h1>Resume builder v1</h1>
         <hr></hr>
-        
+
         <div className="info">
           <h3>Peronal Information</h3>
           <p>{userName}</p>

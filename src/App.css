@@ -1,24 +1,27 @@
 #root {
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
-  /* min-width: 1200px; */
+  min-width: 80vw;
 }
 
 .body {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 50px;
 }
 
 /* TODO */
 .side-bar {
-  min-width: 200px;
+  width: min(300px, 50vw);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 
 }
 .main {
-  min-width: 500px;
+  width: min(700px, 50vw);
   display: flex;
   flex-direction: column;
   gap: 2rem;
