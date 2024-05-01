@@ -1,22 +1,21 @@
-export default function Dialog(
-  { isOpen, setIsOpen },
-  { schoolName, setSchoolName },
-  { date, setDate },
-  { description, setDescription }
-) {
-  let tmpSchool = schoolName;
-  let tmpDate = date;
-  let tmpDesc = description;
+export default function SchoolDialog({
+  isEducationOpen,
+  setIsEducationOpen,
+  education
+}) {
+  let tmpSchool = education.schoolName;
+  let tmpDate = education.eduDate;
+  let tmpDesc = education.eduDesc;
 
   return (
-    <dialog open={isOpen}>
+    <dialog open={isEducationOpen}>
       <div className="modal">
         <label htmlFor="mySchool">School Name</label>
         <input
           name="mySchool"
           id="mySchool"
           type="text"
-          defaultValue={schoolName}
+          defaultValue={tmpSchool}
           onChange={(e) => {
             tmpSchool = e.target.value;
           }}
@@ -26,7 +25,7 @@ export default function Dialog(
           name="myDate"
           id="myDate"
           type="text"
-          defaultValue={date}
+          defaultValue={tmpDate}
           onChange={(e) => {
             tmpDate = e.target.value;
           }}
@@ -36,7 +35,7 @@ export default function Dialog(
           name="myDesc"
           id="myDesc"
           type="text"
-          defaultValue={description}
+          defaultValue={tmpDesc}
           onChange={(e) => {
             tmpDesc = e.target.value;
           }}
@@ -45,15 +44,15 @@ export default function Dialog(
 
       <button
         onClick={() => {
-          setSchoolName(tmpSchool);
-          setDate(tmpDate);
-          setDescription(tmpDesc);
-          setIsOpen(false);
+          education.setSchoolName(tmpSchool);
+          education.setEduDate(tmpDate);
+          education.setEduDesc(tmpDesc);
+          setIsEducationOpen(false);
         }}
       >
         Edit
       </button>
-      <button onClick={() => setIsOpen(false)}>Cancel</button>
+      <button onClick={() => setIsEducationOpen(false)}>Cancel</button>
     </dialog>
   );
 }
