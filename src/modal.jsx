@@ -1,11 +1,18 @@
+import Education from "./Education"
+
+function handleAdd(eduList, edu, setEduList) {
+  const newList = eduList.concat( edu );
+
+  setEduList(newList);
+}
+
 export default function SchoolDialog({
   isEducationOpen,
   setIsEducationOpen,
-  education
+  eduList,
+  setEduList
 }) {
-  let tmpSchool = education.schoolName;
-  let tmpDate = education.eduDate;
-  let tmpDesc = education.eduDesc;
+  let edu = Education();
 
   return (
     <dialog open={isEducationOpen}>
@@ -15,9 +22,9 @@ export default function SchoolDialog({
           name="mySchool"
           id="mySchool"
           type="text"
-          defaultValue={tmpSchool}
+          defaultValue={edu.schoolName}
           onChange={(e) => {
-            tmpSchool = e.target.value;
+            edu.schoolName = e.target.value;
           }}
         ></input>
         <label htmlFor="myDate">Date</label>
@@ -25,9 +32,9 @@ export default function SchoolDialog({
           name="myDate"
           id="myDate"
           type="text"
-          defaultValue={tmpDate}
+          defaultValue={edu.eduDate}
           onChange={(e) => {
-            tmpDate = e.target.value;
+            edu.eduDate = e.target.value;
           }}
         ></input>
         <label htmlFor="myDesc">Description</label>
@@ -35,22 +42,20 @@ export default function SchoolDialog({
           name="myDesc"
           id="myDesc"
           type="text"
-          defaultValue={tmpDesc}
+          defaultValue={edu.eduDesc}
           onChange={(e) => {
-            tmpDesc = e.target.value;
+            edu.eduDesc = e.target.value;
           }}
         ></input>
       </div>
 
       <button
         onClick={() => {
-          education.setSchoolName(tmpSchool);
-          education.setEduDate(tmpDate);
-          education.setEduDesc(tmpDesc);
+          handleAdd(eduList, edu, setEduList)
           setIsEducationOpen(false);
         }}
       >
-        Edit
+        Add
       </button>
       <button onClick={() => setIsEducationOpen(false)}>Cancel</button>
     </dialog>

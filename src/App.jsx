@@ -3,6 +3,7 @@ import "./App.css";
 import "./Modal.css";
 import "./InfoModal.css";
 
+import Education from "./Education";
 import CompanyDialog from "./CompanyModal";
 import InfoDialog from "./InfoModal";
 import SchoolDialog from "./Modal";
@@ -16,18 +17,10 @@ function App() {
   const [email, setEmail] = useState("jdpower@gmail.com");
   const [number, setNumber] = useState("112-358-1321");
 
-  const [schoolName, setSchoolName] = useState("University A");
-  const [eduDate, setEduDate] = useState("01/01/1970 - 01/01/2024");
-  const [eduDesc, setEduDesc] = useState(
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\
-    Duis semper ex et ornare lobortis.\
-    Cras aliquet orci nec diam tempus, a feugiat sem convallis.\
-    Pellentesque congue sem nec congue ultricies.\
-    Nam vehicula nisl ut dictum fringilla."
-  );
-
+  const [eduList, setEduList] = useState([Education()]);
+  // const [companyList, setCompanyList] = useState([]);
   const [companyName, setCompanyName] = useState("Good Company");
-  const [jobTitle, setJobTitle] = useState("Lunch stealer");
+  const [jobTitle, setJobTitle] = useState("Lunch thief");
   const [companyDate, setCompanyDate] = useState("01/01/2024 - 01/14/2024");
   const [companyDesc, setcompanyDesc] = useState(
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\
@@ -37,14 +30,7 @@ function App() {
   Nam vehicula nisl ut dictum fringilla."
   );
   const info = { userName, setUserName, email, setEmail, number, setNumber };
-  const edu = {
-    schoolName,
-    setSchoolName,
-    eduDate,
-    setEduDate,
-    eduDesc,
-    setEduDesc,
-  };
+
   const exp = {
     companyName,
     setCompanyName,
@@ -55,6 +41,16 @@ function App() {
     jobTitle,
     setJobTitle,
   };
+  console.log(eduList);
+  const eduCard = eduList.map((item) => {
+    return (
+      <div className="edu-card" key={item.id}>
+        <p>{item.schoolName}</p>
+        <p>{item.eduDate}</p>
+        <p>{item.eduDesc}</p>
+      </div>
+    );
+  });
   return (
     <div className="body">
       <div className="side-bar">
@@ -64,7 +60,7 @@ function App() {
               setIsInfoOpen(!isInfoOpen);
             }}
           >
-            {isInfoOpen ? "Close" : "Edit Info"}
+            Edit Info
           </button>
           <InfoDialog
             isOpen={isInfoOpen}
@@ -78,12 +74,13 @@ function App() {
               setIsEducationOpen(!isEducationOpen);
             }}
           >
-            {isEducationOpen ? "Close" : "Add Education"}
+            Add Education
           </button>
           <SchoolDialog
             isEducationOpen={isEducationOpen}
             setIsEducationOpen={setIsEducationOpen}
-            education={edu}
+            eduList={eduList}
+            setEduList={setEduList}
           />
         </div>
         <div>
@@ -92,7 +89,7 @@ function App() {
               setIsCompanyOpen(!isCompanyOpen);
             }}
           >
-            {isCompanyOpen ? "Close" : "Add Experience"}
+            Add Experience
           </button>
         </div>
         <CompanyDialog
@@ -113,9 +110,7 @@ function App() {
         </div>
         <div className="edu-container">
           <h3>Education</h3>
-          <p>{schoolName}</p>
-          <p>{eduDate}</p>
-          <p>{eduDesc}</p>
+          {eduCard}
         </div>
         <div className="exp-container">
           <h3>Experience</h3>
