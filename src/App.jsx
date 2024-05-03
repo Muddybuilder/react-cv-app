@@ -1,12 +1,13 @@
 import { useState } from "react";
-import "./App.css";
-import "./Modal.css";
-import "./InfoModal.css";
+import "./components/Modal.css";
+import "./components/InfoModal.css";
+import "./App.css"
 
-import Education from "./Education";
-import CompanyDialog from "./CompanyModal";
-import InfoDialog from "./InfoModal";
-import SchoolDialog from "./Modal";
+import createEducation from "./components/Education";
+import Company from "./components/Company";
+import InfoDialog from "./components/InfoModal";
+import SchoolDialog from "./components/Modal";
+import CompanyDialog from "./components/CompanyModal";
 
 function App() {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
@@ -17,40 +18,45 @@ function App() {
   const [email, setEmail] = useState("jdpower@gmail.com");
   const [number, setNumber] = useState("112-358-1321");
 
-  const [eduList, setEduList] = useState([Education()]);
-  // const [companyList, setCompanyList] = useState([]);
-  const [companyName, setCompanyName] = useState("Good Company");
-  const [jobTitle, setJobTitle] = useState("Lunch thief");
-  const [companyDate, setCompanyDate] = useState("01/01/2024 - 01/14/2024");
-  const [companyDesc, setcompanyDesc] = useState(
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\
-  Duis semper ex et ornare lobortis.\
-  Cras aliquet orci nec diam tempus, a feugiat sem convallis.\
-  Pellentesque congue sem nec congue ultricies.\
-  Nam vehicula nisl ut dictum fringilla."
-  );
+  const [eduList, setEduList] = useState([createEducation()]);
+  const [companyList, setCompanyList] = useState([Company()]);
+
   const info = { userName, setUserName, email, setEmail, number, setNumber };
 
-  const exp = {
-    companyName,
-    setCompanyName,
-    companyDate,
-    setCompanyDate,
-    companyDesc,
-    setcompanyDesc,
-    jobTitle,
-    setJobTitle,
-  };
-  console.log(eduList);
   const eduCard = eduList.map((item) => {
     return (
       <div className="edu-card" key={item.id}>
-        <p>{item.schoolName}</p>
+        <h4>{item.schoolName}</h4>
         <p>{item.eduDate}</p>
         <p>{item.eduDesc}</p>
+        <button
+          onClick={() => {
+            setEduList(eduList.filter((elem) => elem.id !== item.id));
+          }}
+        >
+          delete
+        </button>
       </div>
     );
   });
+  const companyCard = companyList.map((item) => {
+    return (
+      <div className="comp-card" key={item.id}>
+        <h4>{item.companyName}</h4>
+        <p>{item.jobTitle}</p>
+        <p>{item.companyDate}</p>
+        <p>{item.companyDesc}</p>
+        <button
+          onClick={() => {
+            setCompanyList(companyList.filter((elem) => elem.id !== item.id));
+          }}
+        >
+          delete
+        </button>
+      </div>
+    );
+  });
+
   return (
     <div className="body">
       <div className="side-bar">
@@ -95,7 +101,8 @@ function App() {
         <CompanyDialog
           isCompanyOpen={isCompanyOpen}
           setIsCompanyOpen={setIsCompanyOpen}
-          experience={exp}
+          companyList={companyList}
+          setCompanyList={setCompanyList}
         />
       </div>
       <div className="main">
@@ -114,10 +121,7 @@ function App() {
         </div>
         <div className="exp-container">
           <h3>Experience</h3>
-          <p>{companyName}</p>
-          <p>{jobTitle}</p>
-          <p>{companyDate}</p>
-          <p>{companyDesc}</p>
+          {companyCard}
         </div>
       </div>
     </div>
