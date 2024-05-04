@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./components/Modal.css";
-import "./components/InfoModal.css";
 import "./App.css"
 
 import createEducation from "./components/Education";

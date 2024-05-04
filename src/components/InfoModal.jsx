@@ -5,7 +5,7 @@ export default function InfoDialog({ isOpen, setIsOpen, information }) {
 
   return (
     <dialog open={isOpen}>
-      <div className="info-modal">
+      <div className="modal">
         <label>
           Name
           <input
